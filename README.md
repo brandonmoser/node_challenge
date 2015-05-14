@@ -4,7 +4,7 @@ The assignment is to build a simple Producer/Consumer system. In this system the
 
 ## Requirements
 
-At a minimum, we would like to see the following implemented:
+At a minimum, the following must be implemented:
 
 * The Producer and Consumer as separate NodeJS services.
 * The Producer generating random addition expressions of two positive integers, e.g. "2+3="

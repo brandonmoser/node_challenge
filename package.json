@@ -4,7 +4,7 @@
   "description": "A Node Challenge Application",
   "main": "server.js",
   "scripts": {
-    "generate": "node generator.js --queries=1",
+    "generate": "node generator.js --queries=10000 --delay=250",
     "test": "./node_modules/.bin/mocha --reporter list"
   },
   "author": "Brandon Moser <brandon@brandonmoser.com>",

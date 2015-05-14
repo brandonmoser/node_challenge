@@ -17,23 +17,32 @@ var UPPER_LIMIT = process.env.UPPER_LIMIT || 100;
 var INTS_ONLY = process.env.INTS_ONLY || false;
 
 // How many queries should we run against the server? Default to just 1
-var queries = 1;
+var QUERIES;
 if (argv.queries) {
-  queries = argv.queries;
+  QUERIES = argv.queries;
 } else if (parseInt(argv._[0]) !== NaN) {
-  queries = parseInt(argv._[0]);
+  QUERIES = parseInt(argv._[0]);
+} else {
+  QUERIES = 10;
 }
 
-// How often should the requests to the server be made? Default to 1/second (1000 ms)
-var delay = 1000;
+// How often should the requests to the server be made? Default to 1 sec (1000 ms)
+var DELAY;
 if (argv.delay) {
-  delay = argv.delay;
+  DELAY = argv.delay;
 } else if (parseInt(argv._[1]) !== NaN) {
-  delay = parseInt(argv._[1]);
+  DELAY = parseInt(argv._[1]);
+} else {
+  DELAY = 1000;
 }
 
-// Create a loop of requests to be sent to the server for calculation
-for (var i=0; i<queries; i++) {
+// Create an interval of requests to be sent to the server for calculation
+var i = 0;
+var calcLoop = setInterval(function(){
+    sendRequest();
+  }, DELAY);
+
+function sendRequest() {
   var firstDigit, secondDigit, operator;
 
   // Rounded the digits for readability, since Math.random() returns a large number of decimals
@@ -46,7 +55,6 @@ for (var i=0; i<queries; i++) {
   operator = OPERATORS[lib.getRandomInt(0,3)];
 
   query = '?q=' + encodeURIComponent(firstDigit + operator + secondDigit + '=');
-  console.log('query', query);
 
   var req = http.request({
     method: 'GET',
@@ -54,16 +62,20 @@ for (var i=0; i<queries; i++) {
     port: PORT,
     path: '/'+query
   }, function logResponse(res){
-    console.log('STATUS: ' + res.statusCode);
-    console.log('HEADERS: ' + JSON.stringify(res.headers));
+    var data;
     res.setEncoding('utf8');
     res.on('data', function (chunk) {
-      console.log('BODY: ' + chunk);
+      console.log('Response: ', res.statusCode, chunk);
     });
   });
   req.on('error', function(e) {
     console.log('problem with request: ' + e.message);
   });
   req.end();
-}
+  i++;
 
+  if (i>QUERIES) {
+    clearInterval(calcLoop);
+    calcLoop = null;
+  }
+}

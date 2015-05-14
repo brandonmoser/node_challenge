@@ -14,12 +14,20 @@ var PORT = process.env.PORT || 3000;
 var app = connect();
 
 app.use(function(req, res){
-  var url_parts = url.parse(req.url);
+  var url_parts = url.parse(decodeURIComponent(req.url));
   var params = qs.parse(url_parts.query);
-  console.log('parts', url_parts);
-  console.log('params', params);
+  var parsed = lib.parseQuery(params.q);
 
-  res.end('Hello from Connect!\n' + JSON.stringify(params));
+  var result = {};
+  result.problem = params.q;
+
+  if (result.problem.indexOf(' ') > -1) result.problem = result.problem.replace(' ', '+');
+  result.answer = lib.calculate(parsed[0], parsed[2], parsed[1]);
+
+  console.log('Request: ', JSON.stringify(result));
+
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(result));
 });
 
 var server = http.createServer(app);
