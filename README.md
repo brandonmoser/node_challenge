@@ -20,3 +20,36 @@ The end product should:
 * NOT use Express (Connect is Ok)
 * Include UML Activity Diagram and UML Sequence Diagram documenting the business logic
 * Include Unit tests
+
+## Building/Installing Project
+
+1) Clone the project locally
+```sh
+$ git clone https://github.com/brandonmoser/node_challenge.git && cd node_challenge
+```
+2) Then install the npm packages
+```sh
+$ npm install
+```
+
+## Running Tests
+
+The tests are built with Mocha & Chai
+
+```sh
+$ npm test
+```
+
+## Running the Generator(s) and Server
+
+Each Generator will require a separate terminal instance. Only 1 server can be run at a time, unless different ports are defined. The Requesting and Serving port can be set by the environment variable ```$ export PORT=3000```.
+
+Running the server
+```sh
+$ npm start
+```
+
+Running the generator
+```sh
+$ npm run generate
+```
