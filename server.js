@@ -14,17 +14,33 @@ var PORT = process.env.PORT || 3000;
 var app = connect();
 
 app.use(function(req, res){
+  var result = {};
+
   var url_parts = url.parse(decodeURIComponent(req.url));
   var params = qs.parse(url_parts.query);
   var parsed = lib.parseQuery(params.q);
+  if (!parsed){
+    result.error = 'Invalid request'
+    res.statusCode = 400;
+    lib.logger('Request: ' + JSON.stringify(result));
+    res.end(JSON.stringify(result));
+    return;
+  }
 
-  var result = {};
   result.problem = params.q;
 
   if (result.problem.indexOf(' ') > -1) result.problem = result.problem.replace(' ', '+');
-  result.answer = lib.calculate(parsed[0], parsed[2], parsed[1]);
+  try {
+    result.answer = lib.calculate(parsed[0], parsed[2], parsed[1]);
+  } catch(e){
+    result.error = e.message;
+    res.statusCode = 400;
+    lib.logger('Request: ' + JSON.stringify(result));
+    res.end(JSON.stringify(result));
+    return;
+  }
 
-  console.log('Request: ', JSON.stringify(result));
+  lib.logger('Request: ' + JSON.stringify(result));
 
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(result));
