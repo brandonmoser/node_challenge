@@ -2,6 +2,8 @@
 
 The assignment is to build a simple Producer/Consumer system. In this system the Generator will send a series of random arithmetic expressions, while the Evaluator will accept these expressions, compute the result and then report the solution to the Generator.
 
+----
+
 ## Requirements
 
 At a minimum, the following must be implemented:
@@ -20,6 +22,14 @@ The end product should:
 * NOT use Express (Connect is Ok)
 * Include UML Activity Diagram and UML Sequence Diagram documenting the business logic
 * Include Unit tests
+
+### UML Activity Diagram
+![UML Activity Diagram](https://github.com/brandonmoser/node_challenge/raw/master/assets/UML_diagrams.001.jpg "UML Activity Diagram")
+
+### UML Sequence Diagram
+![UML Sequence Diagram](https://github.com/brandonmoser/node_challenge/raw/master/assets/UML_diagrams.002.jpg "UML Sequence Diagram")
+
+----
 
 ## Building/Installing Project
 
