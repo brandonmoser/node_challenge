@@ -7,16 +7,18 @@
     "generate": "node generator.js --queries=10000 --delay=250",
     "test": "./node_modules/.bin/mocha --reporter list"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonmoser/node_challenge.git"
+  },
   "author": "Brandon Moser <brandon@brandonmoser.com>",
   "license": "MIT",
   "dependencies": {
     "connect": "^3.3.5",
-    "minimist": "^1.1.1",
     "qs": "^2.4.2"
   },
   "devDependencies": {
     "chai": "^2.3.0",
-    "mocha": "^2.2.4",
-    "should": "^6.0.1"
+    "mocha": "^2.2.4"
   }
 }

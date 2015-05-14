@@ -2,7 +2,6 @@
 // like '2+1=', '3-2=', '5*3=', and '4/2='
 // It accepts any type of Float number and errors on common bad requests, like
 // Divide-by-zero and invalid operators
-var util = require('util');
 var http = require('http');
 var connect = require('connect');
 var qs = require('qs');
