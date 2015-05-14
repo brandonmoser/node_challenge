@@ -12,7 +12,6 @@
   "dependencies": {
     "connect": "^3.3.5",
     "minimist": "^1.1.1",
-    "optimist": "^0.6.1",
     "qs": "^2.4.2"
   },
   "devDependencies": {
