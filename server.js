@@ -18,7 +18,16 @@ app.use(function(req, res){
 
   var url_parts = url.parse(decodeURIComponent(req.url));
   var params = qs.parse(url_parts.query);
+  if (!params.q) {
+    result.error = 'Invalid request, send /?q=[your simple arthimatic problem], for example /?q=1+2=';
+    res.statusCode = 400;
+    lib.logger('Request: ' + JSON.stringify(result));
+    res.end(JSON.stringify(result));
+    return;
+  }
+
   var parsed = lib.parseQuery(params.q);
+  result.problem = params.q;
   if (!parsed){
     result.error = 'Invalid request'
     res.statusCode = 400;
@@ -26,8 +35,6 @@ app.use(function(req, res){
     res.end(JSON.stringify(result));
     return;
   }
-
-  result.problem = params.q;
 
   if (result.problem.indexOf(' ') > -1) result.problem = result.problem.replace(' ', '+');
   try {
