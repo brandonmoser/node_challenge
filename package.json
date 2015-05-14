@@ -8,7 +8,7 @@
     "test": "./node_modules/.bin/mocha --reporter list"
   },
   "author": "Brandon Moser <brandon@brandonmoser.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "connect": "^3.3.5",
     "minimist": "^1.1.1",
