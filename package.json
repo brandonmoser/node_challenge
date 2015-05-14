@@ -1,0 +1,23 @@
+{
+  "name": "node_challenge",
+  "version": "0.0.1",
+  "description": "A Node Challenge Application",
+  "main": "server.js",
+  "scripts": {
+    "generate": "node generator.js --queries=1",
+    "test": "./node_modules/.bin/mocha --reporter list"
+  },
+  "author": "Brandon Moser <brandon@brandonmoser.com>",
+  "license": "ISC",
+  "dependencies": {
+    "connect": "^3.3.5",
+    "minimist": "^1.1.1",
+    "optimist": "^0.6.1",
+    "qs": "^2.4.2"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "mocha": "^2.2.4",
+    "should": "^6.0.1"
+  }
+}
